@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "20a7195e-a718-42b8-bad2-4a4790a7c6d6",
+            "actions": [
+                {
+                    "name": "SwitchPole",
+                    "type": "Button",
+                    "id": "a8065568-bf10-4f12-a2a2-a0008ad3510d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2a45c35f-25a9-4db6-bc92-3e3ada0afc18",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchPole",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
