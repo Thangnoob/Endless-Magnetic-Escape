@@ -74,7 +74,7 @@ Alien đóng vai trò là "vùng chết" di động ép người chơi phải ti
 ## 🗺️ 10. Lộ Trình Phát Triển (Development Roadmap)
 
 ### 🟩 Phase 1 — Core Gameplay (Hoàn thành trong 2 ngày)
-- [ ] Xây dựng cơ chế vật lý nam châm (Hút / Đẩy).
+- [X] Xây dựng cơ chế vật lý nam châm (Hút / Đẩy).
 - [ ] Hệ thống tự động Spawn vật thể có cực từ ngẫu nhiên.
 - [ ] Trọng lực & Logic AI Alien rượt đuổi.
 - [ ] Tính điểm (Score) và xử lý Game Over cơ bản.
