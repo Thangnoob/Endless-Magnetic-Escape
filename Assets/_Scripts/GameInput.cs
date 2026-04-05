@@ -23,4 +23,10 @@ public class GameInput : MonoBehaviour
     {
         return inputActions.Player.SwitchPole.IsPressed();
     }
+
+    public Vector2 GetMovementVectorNormalized()
+    {
+        Vector2 inputVector = inputActions.Player.Move.ReadValue<Vector2>();
+        return inputVector.normalized;
+    }
 }
