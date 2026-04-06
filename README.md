@@ -7,13 +7,13 @@ Một tựa game arcade sinh tồn tốc độ cao được phát triển bằng
 ## 🛑 1. Tổng Quan (Game Overview)
 
 ### 1.1 Mô Tả Tóm Tắt
-**Endless Magnetic Escape** là một game mobile/PC 2D dạng *vertical-scrolling* (cuộn dọc). Người chơi điều khiển một nhân vật cầm nam châm, liên tục phải bay lên cao bằng cách tương tác lực hút/đẩy với các vật thể ngẫu nhiên xuất hiện trên màn hình để trốn thoát khỏi một con Alien khát máu đang truy đuổi gắt gao phía dưới.
+**Endless Magnetic Escape** là một game mobile/PC 2D dạng *vertical-scrolling* (cuộn dọc). Người chơi điều khiển một nhân vật cầm nam châm, liên tục phải bay lên cao bằng cách tương tác lực hút/đẩy với các vật thể ngẫu nhiên xuất hiện trên màn hình để trốn thoát khỏi một con Alien dữ tợn đang truy đuổi gắt gao phía dưới.
 
 ### 1.2 Thông Tin Dự Án
 | Hạng mục | Chi tiết |
 | :--- | :--- |
 | **Thể loại** | Arcade / Endless Climber / Survival |
-| **Nền tảng** | Mobile (Android/iOS), PC |
+| **Nền tảng** | Mobile (Android), PC |
 | **Góc nhìn** | 2D Side-view / Vertical Scroll |
 | **Chế độ chơi** | Single Player (Chơi đơn) |
 | **Mục tiêu** | Leo cao nhất có thể, không bị Alien bắt |
@@ -23,14 +23,11 @@ Một tựa game arcade sinh tồn tốc độ cao được phát triển bằng
 ## 🕹️ 2. Core Gameplay
 
 ### 2.1 Vòng Lặp Chính (Core Game Loop)
-* **Khởi đầu:** Nhân vật xuất phát ở vùng thấp với một thanh nam châm trên tay.
-* **Tương tác:** Chuyển đổi cực nam châm (Hút/Đẩy) với các vật thể ngẫu nhiên lơ lửng để tạo lực đẩy nhân vật lên trên.
-* **Áp lực:** Trọng lực liên tục kéo xuống $\rightarrow$ Alien rượt đuổi từ đáy màn hình với tốc độ tăng dần.
-* **Kết thúc:** Trò chơi dừng lại khi người chơi va chạm với Alien hoặc rơi ra ngoài vùng an toàn.
+Player điều hướng $\rightarrow$ Chuyển đổi Cực Nam châm (Hút/Đẩy) $\rightarrow$ Tận dụng Lực Từ Trường để nhân vật di chuyển lên cao $\rightarrow$ Alien rượt đuổi $\rightarrow$ Tăng điểm số (theo thời gian) $\rightarrow$ Alien truy đuổi nhanh hơn 
 
 ### 2.2 Cơ Chế Nam Châm (Magnet Mechanic)
 Đây là "linh hồn" tạo nên sự độc đáo của trò chơi:
-* 🔋 **Cực giống nhau** $\rightarrow$ **Đẩy nhau**: Tạo lực phóng mạnh lên trên.
+* 🔋 **Cực giống nhau** $\rightarrow$ **Đẩy nhau**: Tạo lực đẩy tác động lên nhân vật.
 * 🧲 **Cực khác nhau** $\rightarrow$ **Hút nhau**: Kéo nhân vật áp sát vào vật thể.
 * Người chơi phải liên tục quan sát ký hiệu **N** (Bắc) và **S** (Nam) trên vật thể để đưa ra quyết định chuyển cực kịp thời.
 
@@ -45,14 +42,25 @@ Một tựa game arcade sinh tồn tốc độ cao được phát triển bằng
 
 ### 3.2 Hệ Thống Điều Khiển
 * **Chuyển cực N/S:** Chạm màn hình (Mobile) / Click chuột trái hoặc Space (PC).
-* **Nhắm mục tiêu:** Tự động khóa mục tiêu gần nhất hoặc vuốt nhẹ (Swipe) để định hướng.
+* **Nhắm mục tiêu:** Joystick điều hướng.
 
----
+### 3.3. Physics Configuration (Technical Specs)
+
+Để đảm bảo cảm giác điều khiển (**Game Feel**) đồng nhất và ổn định cho cơ chế hút/đẩy nam châm, các thông số vật lý của **Player** được thiết lập trong Unity Rigidbody 2D như sau:
+
+| Parameter | Value | Design Purpose |
+| :--- | :--- | :--- |
+| **Body Type** | `Dynamic` | Cho phép Player phản hồi với lực từ trường và va chạm vật lý. |
+| **Mass** | `1.0` | Khối lượng tiêu chuẩn để tính toán lực Magnetic ($F = m \cdot a$) đồng bộ. |
+| **Linear Damping** | `1.0` | Giúp Player dừng lại mượt mà, tránh tình trạng trượt vô tận khi ngừng tương tác lực. |
+| **Gravity Scale** | `1.0` | Giữ trọng lực mặc định để người chơi cảm nhận được độ nặng khi rơi tự do. |
 
 ## 🛸 4. Hệ Thống Vật Thể & Kẻ Thù
 
 ### 4.1 Vật Thể (Spawned Objects)
-* **Vật thể từ tính:** Điểm tựa chính để leo lên, sẽ biến mất hoặc mất từ tính sau khi sử dụng.
+* **Vật thể từ tính:** Điểm tựa chính để leo lên.
+
+Dự kiến:
 * **Vật phẩm (Collectibles):** Điểm thưởng, làm chậm Alien hoặc gia tăng công suất nam châm.
 * **Chướng ngại vật:** Các mảnh vỡ không có từ tính, va chạm sẽ làm lệch hướng bay.
 
