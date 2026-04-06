@@ -14,12 +14,28 @@ public class Player : MonoBehaviour
 
     [Header("Rotation Setup")]
     [SerializeField] private float rotationSpeed = 15f;
-    [SerializeField] private float angleOffset = 90f; 
+    [SerializeField] private float angleOffset = 90f;
+
+    [Header(" Settings ")]
+    [SerializeField] private Color southColor = Color.blue;
+    [SerializeField] private Color northColor = Color.red;
+    [SerializeField] private SpriteRenderer poleSR;
 
     private void Awake()
     {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+
+    }
+
+    private void Start()
+    {
+        // Initialize pole color based on starting polarity
+        if (poleSR != null)
+        {
+            poleSR.color = magneticType == MagneticType.North ? northColor : southColor;
+        }
+        
     }
 
     private void Update()
@@ -34,7 +50,15 @@ public class Player : MonoBehaviour
         if (GameInput.Instance.IsSwitchActionPressed() && Time.time - lastSwitch > cooldown)
         {
             SwitchPolarity();
-            transform.Rotate(0, 0, 180f); 
+            lastSwitch = Time.time;
+        }
+    }
+
+    public void SwitchPole()
+    {
+        if (Time.time - lastSwitch > cooldown)
+        {
+            SwitchPolarity();
             lastSwitch = Time.time;
         }
     }
@@ -42,9 +66,19 @@ public class Player : MonoBehaviour
     private void SwitchPolarity()
     {
         if (magneticType == MagneticType.North)
+        {
             magneticType = MagneticType.South;
+
+            if (poleSR != null)
+                poleSR.color = southColor;
+        }
         else
+        {
             magneticType = MagneticType.North;
+
+            if (poleSR != null)
+                poleSR.color = northColor;
+        }
 
         Debug.Log("Switched polarity to: " + magneticType);
     }
@@ -64,7 +98,6 @@ public class Player : MonoBehaviour
             //Atan2 helps convert a vector (x,y) to an angle in Radians, then * Radians to Degrees
             float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
 
-            // Điều chỉnh góc cho đúng hướng ảnh của bạn
             // Fix rotaion offset if your sprite faces right (0 degrees) by default, you might need to subtract 90 degrees to align it correctly
             angle -= angleOffset;
 

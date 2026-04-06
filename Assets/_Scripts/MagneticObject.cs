@@ -10,6 +10,7 @@ public class MagneticObject : MonoBehaviour
     {
         if (collision.CompareTag("Player") || collision.CompareTag("PlayerLine"))
         {
+            Debug.Log("Player is within magnetic field of " + collision.tag);
             Vector2 direction = (Player.Instance.transform.position - transform.position).normalized;
 
             if (Player.Instance.magneticType == magneticType)
