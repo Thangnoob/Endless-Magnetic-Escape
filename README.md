@@ -96,3 +96,6 @@ Alien đóng vai trò là "vùng chết" di động ép người chơi phải ti
 - [ ] Gắn quảng cáo Rewarded Ads & Xây dựng Shop Skin.
 - [ ] Tối ưu hóa hiệu năng & Fix bug.
 - [ ] Đóng gói và phát hành lên các Store.
+
+### Prototype core game play 
+![ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/bc93612e-91a4-4f1a-8704-74cb164cfc84)
